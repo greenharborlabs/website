@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build and type artifacts
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Test output
+playwright-report/
+test-results/
+
+# Local environment files
+.env*
+!.env.example
+
+# Local tool state
+.gstack/
+.vercel/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
