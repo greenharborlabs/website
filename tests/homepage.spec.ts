@@ -72,6 +72,20 @@ test("Paygate product page shows Agent Trust as a built-with proof point", async
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
 });
 
+test("not found page offers recovery links", async ({ page }) => {
+  await page.goto("/missing-page");
+
+  const recovery = page.getByLabel("This page is out of harbor.");
+
+  await expect(page.getByRole("heading", { name: "This page is out of harbor." })).toBeVisible();
+  await expect(recovery.getByRole("link", { name: "Back home" })).toHaveAttribute("href", "/");
+  await expect(recovery.getByRole("link", { name: "View Paygate" })).toHaveAttribute(
+    "href",
+    "/products/paygate",
+  );
+  await expect(recovery.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/#contact");
+});
+
 test("contact section renders launch-ready contact links without placeholders", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Get in Touch" }).click();
