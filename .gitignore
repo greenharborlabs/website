@@ -22,6 +22,7 @@ test-results/
 # Local tool state
 .gstack/
 .vercel/
+plans/
 
 # Logs
 npm-debug.log*
