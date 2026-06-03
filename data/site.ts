@@ -35,8 +35,8 @@ export const ctas = {
 };
 
 export const contactLinks = {
-  // Fill these before launch. Empty values are intentionally not rendered.
-  email: "",
+  email: "contact@greenharbor.com",
+  x: "https://x.com/greenharborlabs",
   github: "",
   linkedin: "",
 };

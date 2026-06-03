@@ -59,7 +59,7 @@ Most editable site copy lives in:
 - `data/products.ts` for product data, currently focused on Paygate.
 - `components/` for the homepage sections and shared presentation components.
 
-Contact links in `data/site.ts` are intentionally blank until launch-ready URLs exist. Empty links are not rendered.
+Email and X contact links are configured in `data/site.ts`. Empty optional links are not rendered.
 
 ## Testing
 
@@ -69,7 +69,7 @@ Playwright tests cover:
 - Desktop anchor navigation
 - Mobile menu behavior
 - Paygate homepage and product page content
-- Missing placeholder contact links
+- Launch-ready contact links without placeholders
 - Horizontal overflow across key viewports
 - Reduced-motion visibility
 

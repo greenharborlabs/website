@@ -72,12 +72,20 @@ test("Paygate product page shows Agent Trust as a built-with proof point", async
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
 });
 
-test("contact section does not render fake contact links before launch URLs exist", async ({ page }) => {
+test("contact section renders launch-ready contact links without placeholders", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Get in Touch" }).click();
 
   await expect(page.getByRole("heading", { name: "Let's Build" })).toBeVisible();
-  await expect(page.getByText("Contact links coming soon.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Email: contact@greenharbor.com" })).toHaveAttribute(
+    "href",
+    "mailto:contact@greenharbor.com",
+  );
+  await expect(page.getByRole("link", { name: "X: @greenharborlabs" })).toHaveAttribute(
+    "href",
+    "https://x.com/greenharborlabs",
+  );
+  await expect(page.getByText("Contact links coming soon.")).toHaveCount(0);
   await expect(page.locator('a[href=""], a[href="#"], a[href*="example.com"]')).toHaveCount(0);
 });
 
