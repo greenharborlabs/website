@@ -906,8 +906,8 @@ p {
   content: "";
   position: absolute;
   top: -1px;
-  right: 18px;
-  left: 18px;
+  right: -1px;
+  left: -1px;
   height: 18px;
   border-top: 2px solid rgba(24, 183, 255, 0.74);
   border-right: 2px solid rgba(24, 183, 255, 0.74);
