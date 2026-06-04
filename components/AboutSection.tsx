@@ -7,9 +7,8 @@ export function AboutSection() {
         <SectionHeading id="about-heading" eyebrow="About" title="About Green Harbor Labs" />
         <div className="about-copy">
           <p>
-            Green Harbor Labs is the software engineering home of Mark Hammond, a place
-            for building, testing, and shipping AI-assisted software products,
-            experiments, and tools.
+            Green Harbor Labs is a place for building, testing, and shipping
+            AI-assisted software products, experiments, and tools.
           </p>
           <p>
             The lab focuses on practical software: useful products, clean systems,
