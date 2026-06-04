@@ -9,7 +9,7 @@ test("renders the first viewport with brand, thesis, and CTAs", async ({ page })
       name: "Building software at the edge of AI and engineering craft.",
     }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Get in Touch" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Start a technical prototype" })).toBeVisible();
   await expect(page.getByRole("link", { name: "View Project" })).toBeVisible();
   await expect(page.getByText("402 Payment Required")).toBeVisible();
   await expect(page.getByText("200 Signed trust report")).toBeVisible();
@@ -65,12 +65,37 @@ test("Paygate renders as the concrete proof point without dead optional project 
 
 test("Paygate product page shows Agent Trust as a built-with proof point", async ({ page }) => {
   await page.goto("/products/paygate");
+  const examplesSection = page.getByLabel("Real services using the starter");
 
-  await expect(page.getByRole("heading", { name: "Real services using the starter" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
-  await expect(page.getByText("Reference Service / Payment-Gated API")).toBeVisible();
-  await expect(page.getByText("Program clients can request a report")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Start a technical prototype" })).toBeVisible();
+  await expect(examplesSection.getByRole("heading", { name: "Real services using the starter" })).toBeVisible();
+  await expect(examplesSection.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
+  await expect(examplesSection.getByText("Reference Service / Payment-Gated API")).toBeVisible();
+  await expect(examplesSection.getByText("Program clients can request a report")).toBeVisible();
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
+});
+
+test("Paygate product page includes a practical developer quickstart", async ({ page }) => {
+  await page.goto("/products/paygate");
+
+  await expect(page.getByRole("heading", { name: "Add payment gating to a Spring Boot endpoint" })).toBeVisible();
+  await expect(page.getByText("Gradle first, Maven compatible")).toBeVisible();
+  await expect(page.getByText("implementation(\"com.greenharborlabs:paygate-spring-boot-starter:<version>\")")).toBeVisible();
+  await expect(page.getByText("<artifactId>paygate-spring-boot-starter</artifactId>")).toBeVisible();
+  await expect(page.getByText("@PaymentRequired(price = \"30sat\")")).toBeVisible();
+  await expect(page.getByText("HTTP/1.1 402 Payment Required")).toBeVisible();
+  await expect(page.getByText("backend: lnbits")).toBeVisible();
+  await expect(page.getByText("backend: lnd is supported")).toBeVisible();
+});
+
+test("Paygate product page shows upcoming live LNbits proof without a live link", async ({ page }) => {
+  await page.goto("/products/paygate");
+
+  await expect(page.getByRole("heading", { name: "Live settlement proof is next" })).toBeVisible();
+  await expect(page.getByText("reference service with real LNbits settlement")).toBeVisible();
+  await expect(page.getByText("Coming soon")).toBeVisible();
+  await expect(page.getByText("Real LNbits invoice settlement before retry")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open live service" })).toHaveCount(0);
 });
 
 test("not found page offers recovery links", async ({ page }) => {
@@ -89,9 +114,10 @@ test("not found page offers recovery links", async ({ page }) => {
 
 test("contact section renders launch-ready contact links without placeholders", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Get in Touch" }).click();
+  await page.getByRole("link", { name: "Start a technical prototype" }).click();
 
   await expect(page.getByRole("heading", { name: "Let's Build" })).toBeVisible();
+  await expect(page.getByText("focused technical prototype")).toBeVisible();
   await expect(page.getByRole("link", { name: "Email: contact@greenharbor.com" })).toHaveAttribute(
     "href",
     "mailto:contact@greenharbor.com",

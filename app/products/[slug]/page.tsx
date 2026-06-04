@@ -64,6 +64,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   ].filter((link): link is { label: string; href: string } => isPresentUrl(link.href));
 
   const examples = product.examples ?? [];
+  const proofPoints = product.proofPoints ?? [];
 
   return (
     <>
@@ -79,7 +80,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <p className="product-description">{product.description}</p>
               <div className="inline-actions">
                 <Link className="button button-primary" href="/#contact">
-                  Discuss this project
+                  Start a technical prototype
                 </Link>
                 {productLinks.map((link) => (
                   <a className="button button-secondary" href={link.href} key={link.href}>
@@ -96,6 +97,48 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </aside>
           </div>
         </section>
+
+        {product.quickstart ? (
+          <section className="page-section product-quickstart-section" aria-labelledby="product-quickstart-heading">
+            <div className="site-shell">
+              <div className="section-heading">
+                <p className="section-eyebrow">Quickstart</p>
+                <h2 id="product-quickstart-heading">Add payment gating to a Spring Boot endpoint</h2>
+                <p>{product.quickstart.note}</p>
+              </div>
+
+              <div className="quickstart-grid">
+                <article className="surface-card quickstart-install">
+                  <div className="quickstart-card-heading">
+                    <span>Install</span>
+                    <h3>Gradle first, Maven compatible</h3>
+                  </div>
+                  <div className="code-stack">
+                    {product.quickstart.installs.map((install) => (
+                      <figure className="code-block" key={install.label}>
+                        <figcaption>{install.label}</figcaption>
+                        <pre>
+                          <code>{install.code}</code>
+                        </pre>
+                      </figure>
+                    ))}
+                  </div>
+                </article>
+
+                <div className="quickstart-examples">
+                  {product.quickstart.examples.map((example) => (
+                    <figure className="surface-card quickstart-code-card" key={example.label}>
+                      <figcaption>{example.label}</figcaption>
+                      <pre>
+                        <code>{example.code}</code>
+                      </pre>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section className="page-section product-detail-section">
           <div className="site-shell product-detail-grid">
@@ -155,7 +198,55 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             ))}
                           </div>
                         ) : null}
-                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {proofPoints.length ? (
+          <section className="page-section product-proof-section" aria-labelledby="product-proof-heading">
+            <div className="site-shell">
+              <div className="section-heading">
+                <p className="section-eyebrow">Reference service</p>
+                <h2 id="product-proof-heading">Live settlement proof is next</h2>
+              </div>
+
+              <div className="product-proof-points">
+                {proofPoints.map((proofPoint) => {
+                  const proofLinks = [
+                    { label: "Open live service", href: proofPoint.links?.live },
+                    { label: "View on GitHub", href: proofPoint.links?.github },
+                    { label: "Read docs", href: proofPoint.links?.docs },
+                  ].filter((link): link is { label: string; href: string } => isPresentUrl(link.href));
+
+                  return (
+                    <article className="surface-card product-proof-card" key={proofPoint.name}>
+                      <div className="product-example-meta">
+                        <p className="project-category">{proofPoint.category}</p>
+                        <span className="status-badge">{proofPoint.status}</span>
+                      </div>
+                      <div className="product-proof-card-body">
+                        <h3>{proofPoint.name}</h3>
+                        <p>{proofPoint.description}</p>
+                        <ul>
+                          {proofPoint.details.map((detail) => (
+                            <li key={detail}>{detail}</li>
+                          ))}
+                        </ul>
+                        {proofLinks.length ? (
+                          <div className="inline-actions">
+                            {proofLinks.map((link) => (
+                              <a className="button button-secondary" href={link.href} key={link.href}>
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
                     </article>
                   );
                 })}

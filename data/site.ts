@@ -30,7 +30,7 @@ export const navItems = [
 ] as const;
 
 export const ctas = {
-  primary: { label: "Get in Touch", href: "/#contact" },
+  primary: { label: "Start a technical prototype", href: "/#contact" },
   secondary: { label: "View Project", href: "/products/paygate" },
 };
 

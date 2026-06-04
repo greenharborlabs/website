@@ -20,6 +20,29 @@ export type Product = {
   targetUsers?: string[];
   useCases?: string[];
   techStack: string[];
+  quickstart?: {
+    note: string;
+    installs: {
+      label: string;
+      code: string;
+    }[];
+    examples: {
+      label: string;
+      code: string;
+    }[];
+  };
+  proofPoints?: {
+    name: string;
+    status: ProductStatus | "Coming soon";
+    category: string;
+    description: string;
+    details: string[];
+    links?: {
+      live?: string;
+      github?: string;
+      docs?: string;
+    };
+  }[];
   features: string[];
   examples?: {
     name: string;
@@ -82,6 +105,76 @@ export const paygateProduct: Product = {
     "MPP",
     "LNbits",
     "LND",
+  ],
+  quickstart: {
+    note:
+      "Package coordinates are coming with the first public release. The API shape below shows the intended Spring Boot developer experience.",
+    installs: [
+      {
+        label: "Gradle",
+        code: `dependencies {
+    implementation("com.greenharborlabs:paygate-spring-boot-starter:<version>")
+}`,
+      },
+      {
+        label: "Maven",
+        code: `<dependency>
+  <groupId>com.greenharborlabs</groupId>
+  <artifactId>paygate-spring-boot-starter</artifactId>
+  <version><!-- release version --></version>
+</dependency>`,
+      },
+    ],
+    examples: [
+      {
+        label: "Protect an endpoint",
+        code: `@GetMapping("/trust/report")
+@PaymentRequired(price = "30sat")
+TrustReport report(@RequestParam String domain) {
+    return trustReports.generate(domain);
+}`,
+      },
+      {
+        label: "Unpaid request",
+        code: `HTTP/1.1 402 Payment Required
+WWW-Authenticate: L402 invoice="<bolt11>", macaroon="<token>"
+WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
+
+{
+  "error": "payment_required",
+  "retry": "pay invoice and repeat the request"
+}`,
+      },
+      {
+        label: "Lightning backend",
+        code: `paygate:
+  backend: lnbits
+  price: 30sat
+  lnbits:
+    url: \${LNBITS_URL}
+    api-key: \${LNBITS_API_KEY}
+# backend: lnd is supported for node-direct deployments`,
+      },
+    ],
+  },
+  proofPoints: [
+    {
+      name: "Paygate Agent Trust",
+      status: "Coming soon",
+      category: "Reference Service / Real LNbits Settlement",
+      description:
+        "A reference service with real LNbits settlement is being prepared to show the full unpaid request, Lightning invoice, paid retry, and signed JSON response loop.",
+      details: [
+        "Free catalog and quote endpoints before payment",
+        "Payment-gated trust report generation through Paygate",
+        "Real LNbits invoice settlement before retry",
+        "Ed25519-signed JSON response after payment",
+      ],
+      links: {
+        github: "https://github.com/greenharborlabs/paygate-agent-trust",
+        docs: "https://github.com/greenharborlabs/paygate-agent-trust#readme",
+      },
+    },
   ],
   features: [
     "Single-dependency Spring Boot starter for Paygate auto-configuration",

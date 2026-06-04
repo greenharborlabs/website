@@ -715,6 +715,73 @@ p {
   font-size: 1.4rem;
 }
 
+.product-quickstart-section {
+  background: linear-gradient(180deg, rgba(24, 183, 255, 0.028), transparent);
+}
+
+.quickstart-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.12fr);
+  gap: 18px;
+  margin-top: 42px;
+}
+
+.quickstart-install,
+.quickstart-code-card {
+  padding: 24px;
+}
+
+.quickstart-card-heading span,
+.code-block figcaption,
+.quickstart-code-card figcaption {
+  color: var(--accent-green);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.quickstart-card-heading h3 {
+  margin-top: 8px;
+  font-size: 1.28rem;
+}
+
+.code-stack,
+.quickstart-examples {
+  display: grid;
+  gap: 14px;
+}
+
+.code-stack {
+  margin-top: 22px;
+}
+
+.code-block,
+.quickstart-code-card {
+  min-width: 0;
+  margin: 0;
+}
+
+.code-block pre,
+.quickstart-code-card pre {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 10px 0 0;
+  border: 1px solid rgba(24, 183, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 14px;
+}
+
+.code-block code,
+.quickstart-code-card code {
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace;
+  font-size: 0.84rem;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
 .product-detail-section {
   background: rgba(255, 255, 255, 0.01);
 }
@@ -759,6 +826,58 @@ p {
 .product-example-body > p:first-of-type {
   color: var(--text-primary);
   font-size: 1.04rem;
+}
+
+.product-proof-section {
+  background: linear-gradient(180deg, rgba(56, 248, 161, 0.035), transparent);
+}
+
+.product-proof-points {
+  display: grid;
+  gap: 18px;
+  margin-top: 42px;
+}
+
+.product-proof-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
+  gap: 34px;
+  padding: 24px;
+}
+
+.product-proof-card h3 {
+  font-size: 1.45rem;
+}
+
+.product-proof-card p {
+  margin: 16px 0 0;
+}
+
+.product-proof-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-proof-card li {
+  position: relative;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding-left: 18px;
+}
+
+.product-proof-card li::before {
+  content: "";
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  box-shadow: 0 0 14px rgba(24, 183, 255, 0.45);
 }
 
 .product-detail-grid {
@@ -1194,6 +1313,8 @@ p {
   .contact-inner,
   .product-hero-inner,
   .product-example-card,
+  .quickstart-grid,
+  .product-proof-card,
   .product-detail-grid,
   .product-lists {
     grid-template-columns: 1fr;

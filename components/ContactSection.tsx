@@ -34,7 +34,10 @@ export function ContactSection() {
         <div className="contact-copy">
           <p className="section-eyebrow">Contact</p>
           <h2 id="contact-heading">Let&apos;s Build</h2>
-          <p>Interested in a build, collaboration, or one of the projects? Reach the lab directly.</p>
+          <p>
+            Bring a focused technical prototype, Paygate integration, or AI-assisted product slice.
+            Green Harbor Labs can help shape and ship it.
+          </p>
         </div>
 
         {links.length > 0 ? (
