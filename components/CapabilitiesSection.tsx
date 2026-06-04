@@ -9,13 +9,17 @@ export function CapabilitiesSection() {
           id="capabilities-heading"
           eyebrow="Capabilities"
           title="Engineering Capabilities"
-          body="A practical mix of frontend, backend, AI workflow, cloud, and product engineering experience."
+          body="Deep Java and Spring Boot experience, extended by AI-assisted workflows into the right tools, stacks, and protocols for each product."
         />
         <div className="capability-list">
           {capabilities.map((capability) => (
             <article className="capability-row" key={capability.title}>
               <h3>{capability.title}</h3>
-              <p>{capability.items.join(" · ")}</p>
+              <ul className="tag-list capability-tags" aria-label={`${capability.title} capabilities`}>
+                {capability.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

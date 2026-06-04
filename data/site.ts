@@ -62,24 +62,35 @@ export const buildAreas = [
 
 export const capabilities = [
   {
-    title: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "responsive UI", "animation"],
-  },
-  {
     title: "Backend",
-    items: ["Java", "Spring Boot", "REST APIs", "event-driven systems", "data modeling"],
+    items: ["Java", "Spring Boot", "Spring Security", "REST APIs", "event-driven systems", "data modeling"],
   },
   {
     title: "AI Workflows",
-    items: ["AI coding agents", "planning workflows", "model-assisted development", "automation"],
+    items: ["AI coding agents", "architecture exploration", "model-assisted development", "automation", "rapid prototyping"],
+  },
+  {
+    title: "Bitcoin & Payments",
+    items: ["Bitcoin", "Lightning", "L402", "payment-gated APIs", "LNbits", "LND"],
+  },
+  {
+    title: "Frontend",
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "responsive UI", "product interfaces"],
   },
   {
     title: "Cloud & Data",
-    items: ["AWS", "SQS", "S3", "relational databases", "graph databases", "batch processing"],
+    items: [
+      "cloud architecture",
+      "event-driven workflows",
+      "data pipelines",
+      "relational data modeling",
+      "graph-backed applications",
+      "batch processing",
+    ],
   },
   {
-    title: "Product Engineering",
-    items: ["PRDs", "prototypes", "MVPs", "internal tools", "technical documentation", "QA workflows"],
+    title: "Product Delivery",
+    items: ["PRDs", "MVPs", "internal tools", "technical documentation", "QA workflows", "shipping discipline"],
   },
 ] as const;
 

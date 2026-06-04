@@ -824,18 +824,144 @@ p {
 
 .process-strip {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
   list-style: none;
   padding: 0;
-  margin: 38px 0 0;
+  margin: 0;
 }
 
 .process-strip li {
-  border-top: 2px solid var(--accent-green);
-  padding-top: 16px;
+  min-height: 244px;
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid var(--border-green);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(56, 248, 161, 0.055), rgba(255, 255, 255, 0.018)),
+    var(--panel-glass);
+  padding: 20px;
   color: var(--text-primary);
-  font-weight: 700;
+}
+
+.process-strip li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 42px;
+  right: -13px;
+  z-index: 1;
+  width: 24px;
+  height: 10px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--accent-green) 50%) right center / 10px 10px no-repeat,
+    linear-gradient(90deg, rgba(56, 248, 161, 0.24), var(--accent-green));
+  clip-path: polygon(0 42%, 58% 42%, 58% 0, 100% 50%, 58% 100%, 58% 58%, 0 58%);
+}
+
+.process-strip span,
+.process-feedback-label {
+  color: var(--accent-green);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.process-strip h3 {
+  font-size: 1.05rem;
+}
+
+.process-strip p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.approach-flow {
+  display: grid;
+  gap: 18px;
+  margin-top: 42px;
+}
+
+.process-feedback {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(210px, 0.32fr) 1fr;
+  gap: 24px;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.process-feedback::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 1px solid rgba(24, 183, 255, 0.28);
+  background: linear-gradient(90deg, rgba(24, 183, 255, 0.065), transparent 56%);
+  pointer-events: none;
+}
+
+.process-feedback::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: 18px;
+  left: 18px;
+  height: 18px;
+  border-top: 2px solid rgba(24, 183, 255, 0.74);
+  border-right: 2px solid rgba(24, 183, 255, 0.74);
+  border-left: 2px solid rgba(24, 183, 255, 0.74);
+  border-radius: 8px 8px 0 0;
+}
+
+.process-feedback > * {
+  position: relative;
+  z-index: 1;
+}
+
+.process-feedback-label {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  color: var(--accent-blue);
+}
+
+.process-feedback h3 {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 260px;
+  font-size: 1.28rem;
+}
+
+.process-feedback ul {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.process-feedback li {
+  position: relative;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding-left: 18px;
+}
+
+.process-feedback li::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  box-shadow: 0 0 14px rgba(24, 183, 255, 0.45);
 }
 
 .capability-list {
@@ -854,6 +980,10 @@ p {
 }
 
 .capability-row p {
+  margin: 0;
+}
+
+.capability-tags {
   margin: 0;
 }
 
@@ -1081,6 +1211,32 @@ p {
     grid-template-columns: 1fr;
     gap: 8px;
   }
+
+  .process-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-strip li {
+    min-height: 210px;
+  }
+
+  .process-strip li:not(:last-child)::after {
+    display: none;
+  }
+
+  .process-feedback {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .process-feedback h3 {
+    max-width: none;
+  }
+
+  .process-feedback ul {
+    grid-column: 1;
+    grid-row: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -1179,14 +1335,18 @@ p {
 
   .process-strip {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 12px;
     border-left: 2px solid var(--accent-green);
     padding-left: 18px;
   }
 
   .process-strip li {
-    border-top: 0;
-    padding: 10px 0;
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .process-feedback {
+    padding: 20px;
   }
 }
 

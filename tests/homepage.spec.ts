@@ -53,12 +53,13 @@ test("mobile menu opens, closes with Escape, and exposes all links", async ({ pa
 
 test("Paygate renders as the concrete proof point without dead optional project links", async ({ page }) => {
   await page.goto("/");
+  const paygateSection = page.getByRole("region", { name: "Paygate" });
 
-  await expect(page.getByRole("heading", { name: "Paygate", exact: true })).toBeVisible();
-  await expect(page.getByText("In Development")).toBeVisible();
-  await expect(page.getByText("Spring Boot", { exact: true })).toBeVisible();
-  await expect(page.getByText("First service using Paygate")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
+  await expect(paygateSection.getByRole("heading", { name: "Paygate", exact: true })).toBeVisible();
+  await expect(paygateSection.getByText("In Development")).toBeVisible();
+  await expect(paygateSection.getByText("Spring Boot", { exact: true })).toBeVisible();
+  await expect(paygateSection.getByText("First service using Paygate")).toBeVisible();
+  await expect(paygateSection.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
 });
 
