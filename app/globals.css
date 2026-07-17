@@ -336,7 +336,8 @@ p {
   transform: translateY(-1px);
 }
 
-.button-primary {
+.button-primary,
+.button-primary:visited {
   color: #04100a;
   background: var(--accent-green);
   border: 1px solid var(--accent-green);
