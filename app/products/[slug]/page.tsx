@@ -212,7 +212,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="site-shell">
               <div className="section-heading">
                 <p className="section-eyebrow">Reference service</p>
-                <h2 id="product-proof-heading">Live settlement proof is next</h2>
+                <h2 id="product-proof-heading">Live reference service</h2>
               </div>
 
               <div className="product-proof-points">
