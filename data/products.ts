@@ -33,7 +33,7 @@ export type Product = {
   };
   proofPoints?: {
     name: string;
-    status: ProductStatus | "Coming soon";
+    status: ProductStatus;
     category: string;
     description: string;
     details: string[];
@@ -69,7 +69,7 @@ export const paygateProduct: Product = {
   name: "Paygate",
   slug: "paygate",
   subtitle: "Spring Boot starter for Lightning payment-gated APIs",
-  status: "In Development",
+  status: "Open Source",
   category: "Developer Tool / Spring Boot Starter",
   summary:
     "Paygate is a Spring Boot starter that adds L402 and MPP payment-gated authentication to Java APIs.",
@@ -108,12 +108,12 @@ export const paygateProduct: Product = {
   ],
   quickstart: {
     note:
-      "Package coordinates are coming with the first public release. The API shape below shows the intended Spring Boot developer experience.",
+      "Paygate is publicly available as a Spring Boot starter for payment-gated APIs. The examples below show the released developer experience.",
     installs: [
       {
         label: "Gradle",
         code: `dependencies {
-    implementation("com.greenharborlabs:paygate-spring-boot-starter:<version>")
+    implementation("com.greenharborlabs:paygate-spring-boot-starter:0.1.4")
 }`,
       },
       {
@@ -121,7 +121,7 @@ export const paygateProduct: Product = {
         code: `<dependency>
   <groupId>com.greenharborlabs</groupId>
   <artifactId>paygate-spring-boot-starter</artifactId>
-  <version><!-- release version --></version>
+  <version>0.1.4</version>
 </dependency>`,
       },
     ],
@@ -129,7 +129,7 @@ export const paygateProduct: Product = {
       {
         label: "Protect an endpoint",
         code: `@GetMapping("/trust/report")
-@PaymentRequired(price = "30sat")
+@PaymentRequired(priceSats = 30)
 TrustReport report(@RequestParam String domain) {
     return trustReports.generate(domain);
 }`,
@@ -149,7 +149,7 @@ WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
         label: "Lightning backend",
         code: `paygate:
   backend: lnbits
-  price: 30sat
+  default-price-sats: 30
   lnbits:
     url: \${LNBITS_URL}
     api-key: \${LNBITS_API_KEY}
@@ -160,10 +160,10 @@ WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
   proofPoints: [
     {
       name: "Paygate Agent Trust",
-      status: "Coming soon",
+      status: "Live",
       category: "Reference Service / Real LNbits Settlement",
       description:
-        "A reference service with real LNbits settlement is being prepared to show the full unpaid request, Lightning invoice, paid retry, and signed JSON response loop.",
+        "A live reference service with real LNbits settlement shows the full unpaid request, Lightning invoice, paid retry, and signed JSON response loop.",
       details: [
         "Free catalog and quote endpoints before payment",
         "Payment-gated trust report generation through Paygate",
@@ -171,6 +171,7 @@ WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
         "Ed25519-signed JSON response after payment",
       ],
       links: {
+        live: "https://paygate-agent-trust.fly.dev/",
         github: "https://github.com/greenharborlabs/paygate-agent-trust",
         docs: "https://github.com/greenharborlabs/paygate-agent-trust#readme",
       },
@@ -192,7 +193,7 @@ WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
   examples: [
     {
       name: "Paygate Agent Trust",
-      status: "In Development",
+      status: "Live",
       category: "Reference Service / Payment-Gated API",
       summary:
         "A Spring Boot reference service that sells signed agent trust reports behind Paygate payment challenges.",

@@ -51,26 +51,30 @@ test("mobile menu opens, closes with Escape, and exposes all links", async ({ pa
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
 });
 
-test("Paygate renders as the concrete proof point without dead optional project links", async ({ page }) => {
+test("Paygate renders as an open-source proof point without a product-level live link", async ({ page }) => {
   await page.goto("/");
   const paygateSection = page.getByRole("region", { name: "Paygate" });
 
   await expect(paygateSection.getByRole("heading", { name: "Paygate", exact: true })).toBeVisible();
-  await expect(paygateSection.getByText("In Development")).toBeVisible();
+  await expect(paygateSection.getByText("Open Source", { exact: true })).toBeVisible();
   await expect(paygateSection.getByText("Spring Boot", { exact: true })).toBeVisible();
   await expect(paygateSection.getByText("First service using Paygate")).toBeVisible();
   await expect(paygateSection.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
 });
 
-test("Paygate product page shows Agent Trust as a built-with proof point", async ({ page }) => {
+test("Paygate product page shows the live Agent Trust reference service", async ({ page }) => {
   await page.goto("/products/paygate");
   const examplesSection = page.getByLabel("Real services using the starter");
+  const agentTrustExample = examplesSection
+    .getByRole("heading", { name: "Paygate Agent Trust" })
+    .locator("xpath=ancestor::article");
 
   await expect(page.getByRole("link", { name: "Start a technical prototype" })).toBeVisible();
   await expect(examplesSection.getByRole("heading", { name: "Real services using the starter" })).toBeVisible();
   await expect(examplesSection.getByRole("heading", { name: "Paygate Agent Trust" })).toBeVisible();
   await expect(examplesSection.getByText("Reference Service / Payment-Gated API")).toBeVisible();
+  await expect(agentTrustExample.getByText("Live", { exact: true })).toBeVisible();
   await expect(examplesSection.getByText("Program clients can request a report")).toBeVisible();
   await expect(page.getByRole("link", { name: "Open live project" })).toHaveCount(0);
 });
@@ -80,22 +84,31 @@ test("Paygate product page includes a practical developer quickstart", async ({ 
 
   await expect(page.getByRole("heading", { name: "Add payment gating to a Spring Boot endpoint" })).toBeVisible();
   await expect(page.getByText("Gradle first, Maven compatible")).toBeVisible();
-  await expect(page.getByText("implementation(\"com.greenharborlabs:paygate-spring-boot-starter:<version>\")")).toBeVisible();
+  await expect(page.getByText("implementation(\"com.greenharborlabs:paygate-spring-boot-starter:0.1.4\")")).toBeVisible();
   await expect(page.getByText("<artifactId>paygate-spring-boot-starter</artifactId>")).toBeVisible();
-  await expect(page.getByText("@PaymentRequired(price = \"30sat\")")).toBeVisible();
+  await expect(page.getByText("<version>0.1.4</version>")).toBeVisible();
+  await expect(page.getByText("@PaymentRequired(priceSats = 30)")).toBeVisible();
   await expect(page.getByText("HTTP/1.1 402 Payment Required")).toBeVisible();
   await expect(page.getByText("backend: lnbits")).toBeVisible();
+  await expect(page.getByText("default-price-sats: 30")).toBeVisible();
   await expect(page.getByText("backend: lnd is supported")).toBeVisible();
 });
 
-test("Paygate product page shows upcoming live LNbits proof without a live link", async ({ page }) => {
+test("Paygate product page shows the live LNbits proof with its live service link", async ({ page }) => {
   await page.goto("/products/paygate");
+  const proofSection = page.getByLabel("Live reference service");
+  const agentTrustProof = proofSection
+    .getByRole("heading", { name: "Paygate Agent Trust" })
+    .locator("xpath=ancestor::article");
 
-  await expect(page.getByRole("heading", { name: "Live settlement proof is next" })).toBeVisible();
-  await expect(page.getByText("reference service with real LNbits settlement")).toBeVisible();
-  await expect(page.getByText("Coming soon")).toBeVisible();
-  await expect(page.getByText("Real LNbits invoice settlement before retry")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open live service" })).toHaveCount(0);
+  await expect(proofSection.getByRole("heading", { name: "Live reference service" })).toBeVisible();
+  await expect(agentTrustProof.getByText("Live", { exact: true })).toBeVisible();
+  await expect(agentTrustProof.getByText("A live reference service with real LNbits settlement")).toBeVisible();
+  await expect(agentTrustProof.getByText("Real LNbits invoice settlement before retry")).toBeVisible();
+  await expect(agentTrustProof.getByRole("link", { name: "Open live service" })).toHaveAttribute(
+    "href",
+    "https://paygate-agent-trust.fly.dev/",
+  );
 });
 
 test("not found page offers recovery links", async ({ page }) => {
