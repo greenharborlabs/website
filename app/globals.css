@@ -1379,27 +1379,98 @@ p {
   }
 
   .technical-visual {
-    min-height: 310px;
+    min-height: auto;
+    overflow: visible;
+    border: 0;
+    background: transparent;
   }
 
   .protocol-visual {
+    position: relative;
     grid-template-columns: 1fr;
     grid-template-rows: none;
-    gap: 12px;
-    padding: 18px;
+    gap: 0;
+    padding: 0 0 0 26px;
   }
 
-  .protocol-client,
-  .protocol-paygate,
-  .protocol-invoice,
+  .protocol-visual::before {
+    inset: 10px auto 10px 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent-green), rgba(24, 183, 255, 0.72), rgba(56, 248, 161, 0.4));
+    mask-image: none;
+  }
+
+  .protocol-client {
+    grid-column: 1;
+    grid-row: auto;
+    order: 1;
+  }
+
+  .protocol-paygate {
+    grid-column: 1;
+    grid-row: auto;
+    order: 2;
+  }
+
+  .protocol-invoice {
+    grid-column: 1;
+    grid-row: auto;
+    order: 3;
+  }
+
   .protocol-report {
     grid-column: 1;
     grid-row: auto;
+    order: 4;
   }
 
-  .protocol-card {
+  .protocol-card,
+  .protocol-invoice {
     min-height: auto;
-    padding: 16px;
+    border: 0;
+    border-top: 1px solid var(--line-soft);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 14px 0 14px 18px;
+  }
+
+  .protocol-card::before,
+  .protocol-invoice::before {
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: -22px;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--accent-green);
+    box-shadow: 0 0 16px rgba(56, 248, 161, 0.5);
+  }
+
+  .protocol-paygate::before {
+    background: var(--accent-blue);
+    box-shadow: 0 0 16px rgba(24, 183, 255, 0.5);
+  }
+
+  .protocol-card:first-child {
+    border-top: 0;
+  }
+
+  .protocol-card strong,
+  .protocol-invoice strong {
+    font-size: 0.95rem;
+  }
+
+  .protocol-card p,
+  .protocol-invoice p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .protocol-invoice strong {
+    margin-top: 2px;
+    font-size: 1.2rem;
   }
 
   .protocol-rail {
