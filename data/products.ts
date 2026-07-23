@@ -21,6 +21,8 @@ export type Product = {
   useCases?: string[];
   techStack: string[];
   quickstart?: {
+    heading: string;
+    installHeading: string;
     note: string;
     installs: {
       label: string;
@@ -107,6 +109,8 @@ export const paygateProduct: Product = {
     "LND",
   ],
   quickstart: {
+    heading: "Add payment gating to a Spring Boot endpoint",
+    installHeading: "Gradle first, Maven compatible",
     note:
       "Paygate is publicly available as a Spring Boot starter for payment-gated APIs. The examples below show the released developer experience.",
     installs: [
@@ -212,7 +216,88 @@ WWW-Authenticate: Payment invoice="<bolt11>", amount="30sat"
   },
 };
 
-export const products = [paygateProduct] as const satisfies readonly Product[];
+export const harborMindProduct: Product = {
+  name: "Harbor Mind CLI",
+  slug: "harbor-mind",
+  subtitle: "Local-first knowledge infrastructure for Obsidian vaults",
+  status: "Open Source",
+  category: "AI Knowledge Tool / Developer Workflow",
+  summary:
+    "Harbor Mind turns an Obsidian vault into a searchable, evidence-grounded knowledge system for people and AI agents.",
+  description:
+    "Harbor Mind helps teams retrieve decisions and research from their own notes, capture new material with provenance, and maintain a more useful internal wiki without moving the vault out of their control.",
+  problem:
+    "Important context is often spread across project notes, meeting write-ups, research, and partially maintained wiki pages. Traditional search struggles with wording differences, while general-purpose AI tools cannot reliably show what they are grounding an answer in.",
+  solution:
+    "Harbor Mind combines hybrid semantic and keyword retrieval with wikilink graph expansion, then adds practical workflows for capture, compilation, linting, daily status, project briefs, and read-only MCP access.",
+  whyItMatters:
+    "A durable knowledge system should make existing work easier to find, inspect, and improve. Harbor Mind keeps the vault as the source of truth while making that context usable at the terminal and by compatible agents.",
+  targetUsers: [
+    "Developers who keep project knowledge in Obsidian",
+    "Technical founders and small product teams",
+    "Researchers managing a growing personal knowledge base",
+    "Teams building grounded AI workflows around private notes",
+  ],
+  useCases: [
+    "Recover a project’s decisions, next actions, and evidence before starting work",
+    "Ask grounded questions and inspect the note paths behind the answer",
+    "Capture meeting notes, files, and web research with provenance metadata",
+    "Compile raw material into a structured wiki and find missing or stale concepts",
+    "Give MCP-compatible agents read-only access to vault search and project briefs",
+  ],
+  techStack: ["Java 25", "Spring Boot", "Spring AI", "PGVector", "PostgreSQL", "LM Studio", "MCP", "Obsidian"],
+  quickstart: {
+    heading: "Turn an Obsidian vault into usable project context",
+    installHeading: "Build and connect your local workspace",
+    note:
+      "Harbor Mind is designed to run beside your vault. It uses a local PGVector database and an OpenAI-compatible model endpoint by default, with optional cloud chat fallback.",
+    installs: [
+      {
+        label: "Set the vault and start PGVector",
+        code: `export HARBOR_MIND_VAULT_PATH=/absolute/path/to/your/obsidian-vault
+docker compose up -d`,
+      },
+      {
+        label: "Build Harbor Mind",
+        code: `./gradlew build
+alias hm='java -jar /absolute/path/to/harbor-mind-cli/build/libs/harbor-mind-cli.jar'`,
+      },
+    ],
+    examples: [
+      {
+        label: "Check the local setup",
+        code: `hm doctor
+hm ingest`,
+      },
+      {
+        label: "Start with a project brief",
+        code: `hm brief --project harbor-mind
+hm ask --show-sources "What did I decide about retrieval?"`,
+      },
+      {
+        label: "Capture and curate new knowledge",
+        code: `hm capture notes.md --project harbor-mind --topics "retrieval,rag"
+hm lint --fix`,
+      },
+    ],
+  },
+  features: [
+    "Hybrid vector and keyword retrieval with reciprocal-rank fusion",
+    "Wikilink graph expansion to surface related vault context",
+    "Grounded RAG answers with source-path visibility",
+    "Deterministic project briefs with citations, diagnostics, and bounded output",
+    "Capture workflow for files, stdin, and web sources with provenance metadata",
+    "Raw-to-curated wiki compilation, linting, and missing-concept detection",
+    "Read-only stdio MCP server for search, context, status, and project briefs",
+    "Local-first defaults with optional OpenAI or Anthropic chat fallback",
+  ],
+  links: {
+    github: "https://github.com/greenharborlabs/harbor-mind-cli",
+    docs: "https://github.com/greenharborlabs/harbor-mind-cli#readme",
+  },
+};
+
+export const products = [paygateProduct, harborMindProduct] as const satisfies readonly Product[];
 
 export const featuredProduct = paygateProduct;
 

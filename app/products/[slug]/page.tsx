@@ -103,7 +103,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="site-shell">
               <div className="section-heading">
                 <p className="section-eyebrow">Quickstart</p>
-                <h2 id="product-quickstart-heading">Add payment gating to a Spring Boot endpoint</h2>
+                <h2 id="product-quickstart-heading">{product.quickstart.heading}</h2>
                 <p>{product.quickstart.note}</p>
               </div>
 
@@ -111,7 +111,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <article className="surface-card quickstart-install">
                   <div className="quickstart-card-heading">
                     <span>Install</span>
-                    <h3>Gradle first, Maven compatible</h3>
+                    <h3>{product.quickstart.installHeading}</h3>
                   </div>
                   <div className="code-stack">
                     {product.quickstart.installs.map((install) => (

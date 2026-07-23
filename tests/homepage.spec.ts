@@ -94,6 +94,23 @@ test("Paygate product page includes a practical developer quickstart", async ({ 
   await expect(page.getByText("backend: lnd is supported")).toBeVisible();
 });
 
+test("Harbor Mind is promoted as an open-source knowledge product", async ({ page }) => {
+  await page.goto("/products/harbor-mind");
+
+  await expect(page.getByRole("heading", { name: "Harbor Mind CLI", exact: true })).toBeVisible();
+  await expect(page.getByText("Open Source", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Turn an Obsidian vault into usable project context" })).toBeVisible();
+  await expect(page.getByText("Hybrid vector and keyword retrieval with reciprocal-rank fusion")).toBeVisible();
+  await expect(page.getByRole("link", { name: "View on GitHub" })).toHaveAttribute(
+    "href",
+    "https://github.com/greenharborlabs/harbor-mind-cli",
+  );
+  await expect(page.getByRole("link", { name: "Read docs" })).toHaveAttribute(
+    "href",
+    "https://github.com/greenharborlabs/harbor-mind-cli#readme",
+  );
+});
+
 test("Paygate product page shows the live LNbits proof with its live service link", async ({ page }) => {
   await page.goto("/products/paygate");
   const proofSection = page.getByLabel("Live reference service");
